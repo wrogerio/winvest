@@ -43,7 +43,7 @@ const Envios = () => {
                 <th>Instituicao</th>
                 <th className="d-none d-md-table-cell">Tipo</th>
                 <th className="d-none d-md-table-cell">Data</th>
-                <th>Valor</th>
+                <th style={{ width: 115 }}>Valor</th>
                 <th>#</th>
               </tr>
             </thead>
@@ -54,7 +54,7 @@ const Envios = () => {
                     <td>{item.Instituicao}</td>
                     <td className="d-none d-md-table-cell">{item.TipoEnvio}</td>
                     <td className="d-none d-md-table-cell">{formatDate(item.DtEnvio)}</td>
-                    <td>{formatCurrency(item.Valor)}</td>
+                    <td className="text-end">{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
                         <i className="fas fa-edit me-2"></i>
