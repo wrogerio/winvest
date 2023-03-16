@@ -15,6 +15,16 @@ export function formatDate(date) {
   return [day.length < 2 ? `0${day}` : day, month.length < 2 ? `0${month}` : month, year].join("/");
 }
 
+// Date to yyyy-mm-dd
+export function formatDateISO(date) {
+  const d = new Date(date);
+  const month = `${d.getMonth() + 1}`;
+  const day = `${d.getDate()}`;
+  const year = d.getFullYear();
+
+  return [year, month.length < 2 ? `0${month}` : month, day.length < 2 ? `0${day}` : day].join("-");
+}
+
 // Number to currency
 export function formatCurrency(value) {
   value = parseFloat(value);

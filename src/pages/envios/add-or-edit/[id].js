@@ -4,7 +4,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 
 // components
 import HeaderPage from '@/components/HeaderPage';
-import { toFirstLetterUpperCase } from "@/helper/util";
+import { formatDateISO, toFirstLetterUpperCase } from "@/helper/util";
 import { SaveItem, GetItem } from "@/services/EnviosService";
 import { GetList } from "@/services/InstituicoesService";
 
@@ -14,7 +14,7 @@ const Index = () => {
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const btSubmit = useRef();
-  const [item, setItem] = useState({ InstituicaoId: '', DtEnvio: '', Valor: '' });
+  const [item, setItem] = useState({ InstituicaoId: '', DtEnvio: formatDateISO(new Date()), Valor: '' });
   const [instituicoes, setInstituicoes] = useState([]);
 
   const handleSubmit = (event) => {
@@ -51,7 +51,6 @@ const Index = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="cadastrar" accessKey="v" textBt="Voltar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
-      {JSON.stringify(item, null, 2)}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <fieldset>
           <Row>
