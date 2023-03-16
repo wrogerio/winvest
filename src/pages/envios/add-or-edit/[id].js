@@ -57,7 +57,7 @@ const Index = () => {
             <Col xs={12} lg={4} >
               <Form.Group className="mb-3" controlId="InstituicaoId">
                 <Form.Label>Instituicao</Form.Label>
-                <Form.Select type="text" required name="InstituicaoId" value={item.InstituicaoId} onChange={e => setItem({ ...item, InstituicaoId: e.target.value })}>
+                <Form.Select autoFocus required name="InstituicaoId" value={item.InstituicaoId} onChange={e => setItem({ ...item, InstituicaoId: e.target.value })}>
                   <option value="">Selecione</option>
                   {instituicoes.map((item, index) => (
                     <option key={index} value={item.Id}>{item.Nome}</option>
