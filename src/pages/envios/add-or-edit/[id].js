@@ -14,7 +14,7 @@ const Index = () => {
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const btSubmit = useRef();
-  const [item, setItem] = useState({ InstituicaoId: '', DtEnvio: formatDateISO(new Date()), Valor: '' });
+  const [item, setItem] = useState({ InstituicaoId: '', DtEnvio: formatDateISO(new Date()), Valor: '', TipoEnvio: 'PIX' });
   const [instituicoes, setInstituicoes] = useState([]);
 
   const handleSubmit = (event) => {
@@ -54,7 +54,7 @@ const Index = () => {
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <fieldset>
           <Row>
-            <Col xs={12} lg={4} >
+            <Col xs={12} lg={6} >
               <Form.Group className="mb-3" controlId="InstituicaoId">
                 <Form.Label>Instituicao</Form.Label>
                 <Form.Select autoFocus required name="InstituicaoId" value={item.InstituicaoId} onChange={e => setItem({ ...item, InstituicaoId: e.target.value })}>
@@ -69,7 +69,21 @@ const Index = () => {
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col xs={12} lg={4} >
+            <Col xs={12} lg={2} >
+              <Form.Group className="mb-3" controlId="TipoEnvio">
+                <Form.Label>Tipo</Form.Label>
+                <Form.Select autoFocus required name="TipoEnvio" value={item.TipoEnvio} onChange={e => setItem({ ...item, TipoEnvio: e.target.value })}>
+                  <option value="">Selecione</option>
+                  <option value="PIX">PIX</option>
+                  <option value="TED">TED</option>
+                </Form.Select>
+                <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
+                  Selecione a instituição
+                </Form.Control.Feedback>
+                <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="DtEnvio">
                 <Form.Label>Data de Envio</Form.Label>
                 <Form.Control type="date" required name="DtEnvio" value={item.DtEnvio} onChange={e => setItem({ ...item, DtEnvio: e.target.value })} />
@@ -79,9 +93,9 @@ const Index = () => {
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col xs={12} lg={4} >
+            <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="Valor">
-                <Form.Label>Data de Envio</Form.Label>
+                <Form.Label>Valor R$</Form.Label>
                 <Form.Control type="number" step={0.01} required name="Valor" value={item.Valor} onChange={e => setItem({ ...item, Valor: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
                   Forneça um valor

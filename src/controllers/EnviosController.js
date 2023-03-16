@@ -1,7 +1,7 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString,  Cast(e.DtEnvio AS DATE) AS DtEnvio, e.Valor
+  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString,  Cast(e.DtEnvio AS DATE) AS DtEnvio, e.TipoEnvio, e.Valor
                   FROM Envios e
                   INNER JOIN Instituicoes i on e.InstituicaoId = i.Id
                   ORDER BY e.DtEnvio DESC`;
@@ -16,7 +16,7 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString,  Cast(e.DtEnvio AS DATE) AS DtEnvio, e.Valor
+  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString,  Cast(e.DtEnvio AS DATE) AS DtEnvio, e.TipoEnvio, e.Valor
                   FROM Envios e
                   INNER JOIN Instituicoes i on e.InstituicaoId = i.Id
                   WHERE e.Id = '${id}'`;
@@ -31,7 +31,7 @@ export const GetItem = async (id) => {
 };
 
 export const SaveItem = async (item) => {
-  const query = `INSERT INTO Envios (Id, InstituicaoId, DtEnvio, Valor) VALUES (DEFAULT, '${item.InstituicaoId}', '${item.DtEnvio}', '${item.Valor}')`;
+  const query = `INSERT INTO Envios (Id, InstituicaoId, DtEnvio, TipoEnvio, Valor) VALUES (DEFAULT, '${item.InstituicaoId}', '${item.DtEnvio}', '${item.TipoEnvio}', '${item.Valor}')`;
   try {
     await pool.connect();
     await pool.request().query(query);
@@ -42,7 +42,7 @@ export const SaveItem = async (item) => {
 }
 
 export const UpdateItem = async (item) => {
-  const query = `UPDATE Envios SET InstituicaoId = '${item.InstituicaoId}', DtEnvio = '${item.DtEnvio}', Valor = '${item.Valor}' WHERE Id = '${item.Id}'`;
+  const query = `UPDATE Envios SET InstituicaoId = '${item.InstituicaoId}', DtEnvio = '${item.DtEnvio}', TipoEnvio = '${item.TipoEnvio}', Valor = '${item.Valor}' WHERE Id = '${item.Id}'`;
 
   try {
     await pool.connect();
