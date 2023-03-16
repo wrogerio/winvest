@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { formatCurrency, formatDate, toFirstLetterUpperCase } from './../../helper/util';
+import { formatCurrency, formatDate, handleSearch, toFirstLetterUpperCase } from './../../helper/util';
 // services
 import { GetList, RemoveItem } from '../../services/EnviosService'
 
 const Envios = () => {
   const urlRoot = "envios";
+  const [termo, setTermo] = useState("");
   const [lista, setLista] = useState([]);
 
   const handleRemove = (id) => {
@@ -26,11 +27,16 @@ const Envios = () => {
     })
   }, [])
 
+  useEffect(() => {
+    handleSearch(termo.toLowerCase());
+  }, [termo])
+
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
       <Row>
         <Col className="m-0">
+          <input type="text" className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
           <Table bordered hover>
             <thead>
               <tr>
@@ -44,7 +50,7 @@ const Envios = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr key={index}>
+                  <tr data-search={`${item.Instituicao}-${item.TipoEnvio}-${formatDate(item.DtEnvio)}-${formatCurrency(item.Valor)}-${item.Valor}`} key={index}>
                     <td>{item.Instituicao}</td>
                     <td>{item.TipoEnvio}</td>
                     <td>{formatDate(item.DtEnvio)}</td>

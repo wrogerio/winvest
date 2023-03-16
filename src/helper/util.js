@@ -30,3 +30,17 @@ export function formatCurrency(value) {
   value = parseFloat(value);
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
+
+export const handleSearch = (termo) => {
+  const termos = termo.split(" ");
+  const trs = document.querySelectorAll("tbody tr");
+  trs.forEach(tr => {
+    tr.classList.remove("d-none");
+    const dataSearch = tr.getAttribute("data-search").toLowerCase();
+    termos.forEach(termo => {
+      if (!dataSearch.includes(termo)) {
+        tr.classList.add("d-none");
+      }
+    })
+  })
+}

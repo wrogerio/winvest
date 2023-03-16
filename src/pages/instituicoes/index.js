@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { toFirstLetterUpperCase } from './../../helper/util';
+import { handleSearch, toFirstLetterUpperCase } from './../../helper/util';
 // services
 import { GetList, RemoveItem } from '../../services/InstituicoesService'
 
 const Instituicoes = () => {
   const urlRoot = "instituicoes";
+  const [termo, setTermo] = useState("");
   const [lista, setLista] = useState([]);
 
   const handleRemove = (id) => {
@@ -26,11 +27,16 @@ const Instituicoes = () => {
     })
   }, [])
 
+  useEffect(() => {
+    handleSearch(termo.toLowerCase());
+  }, [termo])
+
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
       <Row>
         <Col className="m-0">
+          <input type="text" className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
           <Table bordered hover>
             <thead>
               <tr>
@@ -41,7 +47,7 @@ const Instituicoes = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr key={index}>
+                  <tr data-search={`${item.Nome}`} key={index}>
                     <td>{item.Nome}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
