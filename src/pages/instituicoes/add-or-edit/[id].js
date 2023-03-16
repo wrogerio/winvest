@@ -47,7 +47,7 @@ const Index = () => {
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Instituicao</Form.Label>
-                <Form.Control type="text" required placeholder="Nome da instituicao" name="Nome" value={item.Nome} onChange={e => setItem({ ...item, Nome: e.target.value })} />
+                <Form.Control autoFocus type="text" required placeholder="Nome da instituicao" name="Nome" value={item.Nome} onChange={e => setItem({ ...item, Nome: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
                   Informe o nome da instituição
                 </Form.Control.Feedback>
