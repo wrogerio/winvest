@@ -35,6 +35,7 @@ const Envios = () => {
             <thead>
               <tr>
                 <th>Instituicao</th>
+                <th>Tipo</th>
                 <th>Data</th>
                 <th>Valor</th>
                 <th>#</th>
@@ -45,6 +46,7 @@ const Envios = () => {
                 Array.isArray(lista) && lista.map((item, index) => (
                   <tr key={index}>
                     <td>{item.Instituicao}</td>
+                    <td>{item.TipoEnvio}</td>
                     <td>{formatDate(item.DtEnvio)}</td>
                     <td>{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
