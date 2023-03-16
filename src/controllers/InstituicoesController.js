@@ -26,7 +26,6 @@ export const GetItem = async (id) => {
 
 export const SaveItem = async (item) => {
   const query = `INSERT INTO Instituicoes (Nome) VALUES ('${item.Nome}')`;
-  console.log(query)
   try {
     await pool.connect();
     await pool.request().query(query);
