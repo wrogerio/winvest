@@ -41,8 +41,8 @@ const Envios = () => {
             <thead>
               <tr>
                 <th>Instituicao</th>
-                <th>Tipo</th>
-                <th>Data</th>
+                <th className="d-none d-md-table-cell">Tipo</th>
+                <th className="d-none d-md-table-cell">Data</th>
                 <th>Valor</th>
                 <th>#</th>
               </tr>
@@ -52,8 +52,8 @@ const Envios = () => {
                 Array.isArray(lista) && lista.map((item, index) => (
                   <tr data-search={`${item.Instituicao}-${item.TipoEnvio}-${formatDate(item.DtEnvio)}-${formatCurrency(item.Valor)}-${item.Valor}`} key={index}>
                     <td>{item.Instituicao}</td>
-                    <td>{item.TipoEnvio}</td>
-                    <td>{formatDate(item.DtEnvio)}</td>
+                    <td className="d-none d-md-table-cell">{item.TipoEnvio}</td>
+                    <td className="d-none d-md-table-cell">{formatDate(item.DtEnvio)}</td>
                     <td>{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
