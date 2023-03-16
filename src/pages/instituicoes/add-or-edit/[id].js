@@ -5,13 +5,13 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 // components
 import HeaderPage from '@/components/HeaderPage';
 import { toFirstLetterUpperCase } from "@/helper/util";
-import { SaveItem } from "@/services/InstituicoesService";
-import { GetItem } from './../../../services/InstituicoesService';
+import { SaveItem, GetItem } from "@/services/InstituicoesService";
 
 const Index = () => {
   const urlRoot = "instituicoes";
   const router = useRouter();
   const [validated, setValidated] = useState(false);
+  const btSubmit = useRef();
   const [item, setItem] = useState({ Nome: '' });
 
   const handleSubmit = (event) => {
@@ -19,6 +19,7 @@ const Index = () => {
     event.preventDefault();
 
     if (form.checkValidity() !== false) {
+      btSubmit.current.style.display = "none";
       SaveItem(item).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else console.log("Erro ao salvar");
@@ -55,7 +56,7 @@ const Index = () => {
             </Col>
           </fieldset>
           <Col>
-            {!validated && <Button type="submit">Submit</Button>}
+            <Button ref={btSubmit} type="submit">Submit</Button>
           </Col>
         </Row>
       </Form>
