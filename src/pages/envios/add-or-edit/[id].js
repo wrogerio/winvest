@@ -72,7 +72,7 @@ const Index = () => {
             <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="TipoEnvio">
                 <Form.Label>Tipo</Form.Label>
-                <Form.Select autoFocus required name="TipoEnvio" value={item.TipoEnvio} onChange={e => setItem({ ...item, TipoEnvio: e.target.value })}>
+                <Form.Select required name="TipoEnvio" value={item.TipoEnvio} onChange={e => setItem({ ...item, TipoEnvio: e.target.value })}>
                   <option value="">Selecione</option>
                   <option value="PIX">PIX</option>
                   <option value="TED">TED</option>
