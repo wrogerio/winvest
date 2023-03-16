@@ -42,7 +42,7 @@ const Envios = () => {
               <tr>
                 <th>Instituicao</th>
                 <th className="d-none d-md-table-cell">Tipo</th>
-                <th className="d-none d-md-table-cell">Data</th>
+                <th className="d-none d-sm-table-cell">Data</th>
                 <th style={{ width: 115 }}>Valor</th>
                 <th>#</th>
               </tr>
@@ -53,7 +53,7 @@ const Envios = () => {
                   <tr data-search={`${item.Instituicao}-${item.TipoEnvio}-${formatDate(item.DtEnvio)}-${formatCurrency(item.Valor)}-${item.Valor}`} key={index}>
                     <td>{item.Instituicao}</td>
                     <td className="d-none d-md-table-cell">{item.TipoEnvio}</td>
-                    <td className="d-none d-md-table-cell">{formatDate(item.DtEnvio)}</td>
+                    <td className="d-none d-sm-table-cell">{formatDate(item.DtEnvio)}</td>
                     <td className="text-end">{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
