@@ -34,6 +34,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className={currentRoute == "/fundos" ? "nav-link active" : "nav-link"} href="/fundos" onClick={() => toggleMenu()}>
+                <i className="fas fa-coins me-1"></i>
+                Fundos
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className={currentRoute == "/envios" ? "nav-link active" : "nav-link"} href="/envios" onClick={() => toggleMenu()}>
                 <i className="fas fa-sack-dollar me-1"></i>
                 Envios
