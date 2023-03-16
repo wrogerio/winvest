@@ -51,7 +51,7 @@ const Envios = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Instituicao}-${item.TipoEnvio}-${formatDate(item.DtEnvio)}-${formatCurrency(item.Valor)}-${item.Valor}`} key={index}>
+                  <tr data-search={`${item.Sigla}-${item.Nome}-${formatDate(item.Cnpj)}-${formatCurrency(item.Valor)}-${item.Valor}-${formatCurrency(item.PVP)}-${item.PVP}`} key={index}>
                     <td>{item.Sigla}</td>
                     <td className="d-none d-md-table-cell">{item.Nome}</td>
                     <td className="d-none d-md-table-cell">{item.Cnpj}</td>
