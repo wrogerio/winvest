@@ -1,5 +1,5 @@
 // number with 2 caracters
-export function numberWith2Caracters(value) {
+export function numberWith2Caracters(value = 0) {
   return value.toString().padStart(2, "0");
 }
 
