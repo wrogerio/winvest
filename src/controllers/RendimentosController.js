@@ -15,10 +15,21 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT  r.Id, InstituicaoId, i.Nome AS Instituicao, Cast(DtRendimento AS DATE) AS DtRendimento, FORMAT(DtRendimento, 'yyyy-MM-dd') As DtRendimentoString, SaldoAnt, Saldo, Valor 
+  const query = ` SELECT  r.Id, InstituicaoId, i.Nome AS Instituicao, Cast(DtRendimento AS DATE) AS DtRendimento, FORMAT(DtRendimento, 'yyyy-MM-dd') As DtRendimentoString, SaldoAnt, Saldo, Valor, CreatedAt
                   FROM    Rendimentos r
                           INNER JOIN Instituicoes i on InstituicaoId = i.Id
                   WHERE   r.Id = '${id}'`;
+  try {
+    await pool.connect();
+    const result = await pool.request().query(query);
+    return result.recordset.length > 0 ? result.recordset[0] : {};
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+export const GetLast = async () => {
+  const query = ` SELECT TOP 1 Saldo FROM Rendimentos ORDER BY CreateAt DESC`;
   try {
     await pool.connect();
     const result = await pool.request().query(query);

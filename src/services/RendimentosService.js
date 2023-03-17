@@ -19,6 +19,12 @@ export const GetItem = async (id) => {
   return data;
 }
 
+export const GetLast = async () => {
+  const response = await fetch(`/api/rendimentos/last`);
+  const data = await response.json();
+  return data;
+}
+
 export const SaveItem = async (item) => {
 
   //check if item contains an id

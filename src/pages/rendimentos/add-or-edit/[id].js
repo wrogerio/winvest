@@ -5,7 +5,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 // components
 import HeaderPage from '@/components/HeaderPage';
 import { formatDateISO, toFirstLetterUpperCase } from "@/helper/util";
-import { SaveItem, GetItem } from "@/services/RendimentosService";
+import { SaveItem, GetItem, GetLast } from "@/services/RendimentosService";
 import { GetList } from "@/services/InstituicoesService";
 
 const Index = () => {
@@ -13,6 +13,7 @@ const Index = () => {
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const [instituicoes, setInstituicoes] = useState([]);
+  const [last, setLast] = useState();
   const btSubmit = useRef();
   const [item, setItem] = useState({ InstituicaoId: "", DtRendimento: formatDateISO(new Date()), SaldoAnt: 0, Saldo: 0 });
 
@@ -36,9 +37,18 @@ const Index = () => {
     })
   }
 
+  const getLast = async () => {
+    const id = window.location.pathname.split("/").pop();
+    GetLast(item.DtRendimento).then(data => {
+      if (id === "0") {
+        setItem({ ...item, SaldoAnt: data.Saldo });
+      }
+    })
+  }
+
   useEffect(() => {
     const id = window.location.pathname.split("/").pop();
-
+    getLast()
     getInstituicoes().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
