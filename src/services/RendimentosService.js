@@ -13,7 +13,6 @@ export const RemoveItem = async (id) => {
 }
 
 export const GetItem = async (id) => {
-  console.log(id);
   const response = await fetch(`/api/rendimentos/add-or-edit/${id}`);
   const data = await response.json();
   return data;

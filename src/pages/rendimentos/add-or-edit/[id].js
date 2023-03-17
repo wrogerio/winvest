@@ -13,7 +13,6 @@ const Index = () => {
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const [instituicoes, setInstituicoes] = useState([]);
-  const [last, setLast] = useState();
   const btSubmit = useRef();
   const [item, setItem] = useState({ InstituicaoId: "", DtRendimento: formatDateISO(new Date()), SaldoAnt: 0, Saldo: 0 });
 
@@ -31,29 +30,28 @@ const Index = () => {
     setValidated(true);
   };
 
+  const getLast = async () => {
+    GetLast().then(data => {
+      setItem({ ...item, SaldoAnt: data.Saldo });
+    })
+  }
+
   const getInstituicoes = async () => {
     GetList().then(data => {
       setInstituicoes(data);
     })
   }
 
-  const getLast = async () => {
-    const id = window.location.pathname.split("/").pop();
-    GetLast(item.DtRendimento).then(data => {
-      if (id === "0") {
-        setItem({ ...item, SaldoAnt: data.Saldo });
-      }
-    })
-  }
-
   useEffect(() => {
     const id = window.location.pathname.split("/").pop();
-    getLast()
     getInstituicoes().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
           setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: item.DtRendimentoString, SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
         })
+      }
+      else {
+        getLast();
       }
     })
   }, [])

@@ -15,10 +15,11 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT  r.Id, InstituicaoId, i.Nome AS Instituicao, Cast(DtRendimento AS DATE) AS DtRendimento, FORMAT(DtRendimento, 'yyyy-MM-dd') As DtRendimentoString, SaldoAnt, Saldo, Valor, CreatedAt
+  const query = ` SELECT  r.Id, InstituicaoId, i.Nome AS Instituicao, Cast(DtRendimento AS DATE) AS DtRendimento, FORMAT(DtRendimento, 'yyyy-MM-dd') As DtRendimentoString, SaldoAnt, Saldo, Valor
                   FROM    Rendimentos r
                           INNER JOIN Instituicoes i on InstituicaoId = i.Id
                   WHERE   r.Id = '${id}'`;
+  console.log(query);
   try {
     await pool.connect();
     const result = await pool.request().query(query);
@@ -58,7 +59,6 @@ export const UpdateItem = async (item) => {
                   SaldoAnt = '${item.SaldoAnt}', 
                   Saldo = '${item.Saldo}' 
                   WHERE Id = '${item.Id}'`;
-  console.log(query);
   try {
     await pool.connect();
     await pool.request().query(query);

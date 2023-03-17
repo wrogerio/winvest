@@ -13,14 +13,15 @@ export function toFirstLetterUpperCase(str) {
   });
 }
 
-// Date to dd/mm/yyyy
-export function formatDate(date) {
-  const d = new Date(date);
-  const month = `${d.getMonth() + 1}`;
-  const day = `${d.getDate()}`;
-  const year = d.getFullYear();
+// convert string yyyy-MM-dd to dd/mm/yyyy
+export function formatDate(value) {
+  const values = value.split('T')[0].split("-");
 
-  return [day.length < 2 ? `0${day}` : day, month.length < 2 ? `0${month}` : month, year].join("/");
+  const day = parseInt(values[2] < 10) ? "0" + values[2] : values[2];
+  const month = parseInt(values[1] < 10) ? "0" + values[1] : values[1];
+  const year = values[0];
+
+  return `${day}/${month}/${year}`;
 }
 
 // Date to yyyy-mm-dd
