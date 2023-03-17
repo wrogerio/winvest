@@ -1,3 +1,8 @@
+// number with 2 caracters
+export function numberWith2Caracters(value) {
+  return value.toString().padStart(2, "0");
+}
+
 // string to first letter uppercase of each word
 export function toFirstLetterUpperCase(str) {
   return str.replace(/\w\S*/g, function (txt) {
@@ -31,6 +36,7 @@ export function formatCurrency(value) {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+// handle search
 export const handleSearch = (termo) => {
   const termos = termo.split(" ");
   const trs = document.querySelectorAll("tbody tr");

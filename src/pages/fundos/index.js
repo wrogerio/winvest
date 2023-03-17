@@ -33,7 +33,7 @@ const Envios = () => {
 
   return (
     <>
-      <HeaderPage title={`${toFirstLetterUpperCase(urlRoot)} - ${lista.length}`} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
+      <HeaderPage title={toFirstLetterUpperCase(urlRoot)} lenght={lista.length} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
       <Row>
         <Col className="m-0">
           <input type="text" className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
