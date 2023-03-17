@@ -1,6 +1,9 @@
 // number with 2 caracters
-export function numberWith2Caracters(value = 0) {
-  return value.toString().padStart(2, "0");
+export function numberWith2Caracters(value) {
+  if (value && value < 10) {
+    return "0" + value;
+  }
+  return value;
 }
 
 // string to first letter uppercase of each word
