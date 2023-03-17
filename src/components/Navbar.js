@@ -51,6 +51,12 @@ const Navbar = () => {
                 Rendimentos
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className={currentRoute == "/dividendos" ? "nav-link active" : "nav-link"} href="/dividendos" onClick={() => toggleMenu()}>
+                <i className="fas fa-hand-holding-usd me-1"></i>
+                Dividendos
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

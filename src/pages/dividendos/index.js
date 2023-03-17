@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { handleSearch, toFirstLetterUpperCase } from '@/helper/util';
+import { handleSearch, toFirstLetterUpperCase, formatDate, formatCurrency } from '@/helper/util';
 // services
-import { GetList, RemoveItem } from '@/services/InstituicoesService'
+import { GetList, RemoveItem } from '@/services/DividendosService'
 
 const Instituicoes = () => {
-  const urlRoot = "instituicoes";
+  const urlRoot = "dividendos";
   const [termo, setTermo] = useState("");
   const [lista, setLista] = useState([]);
 
@@ -40,7 +40,11 @@ const Instituicoes = () => {
           <Table bordered hover>
             <thead>
               <tr>
-                <th>Nome</th>
+                <th>Sigla</th>
+                <th>Data</th>
+                <th className="d-none d-md-table-cell">Qtd</th>
+                <th className="d-none d-md-table-cell">Valor</th>
+                <th>Total</th>
                 <th>#</th>
               </tr>
             </thead>
@@ -48,7 +52,11 @@ const Instituicoes = () => {
               {
                 Array.isArray(lista) && lista.map((item, index) => (
                   <tr data-search={`${item.Nome}`} key={index}>
-                    <td>{item.Nome}</td>
+                    <td>{item.Sigla}</td>
+                    <td>{formatDate(item.DtDiv)}</td>
+                    <td className="d-none d-md-table-cell">{item.Qtd}</td>
+                    <td className="text-end d-none d-md-table-cell">{formatCurrency(item.Valor)}</td>
+                    <td className="text-end">{formatCurrency(item.Total)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
                         <i className="fas fa-edit me-2"></i>

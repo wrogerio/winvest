@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { handleSearch, toFirstLetterUpperCase, formatDate, formatCurrency } from './../../helper/util';
+import { handleSearch, toFirstLetterUpperCase, formatDate, formatCurrency } from '@/helper/util';
 // services
-import { GetList, RemoveItem } from '../../services/RendimentosService'
+import { GetList, RemoveItem } from '@/services/RendimentosService'
 
 const Instituicoes = () => {
   const urlRoot = "rendimentos";
@@ -51,8 +51,8 @@ const Instituicoes = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Nome}`} key={index}>
-                    <td>{formatDate(item.DtRendimento).substring(0, 5)}</td>
+                  <tr data-search={`${item.Instituicao}-${item.Ano}-${item.Mes}-${item.Dia}-${item.MesNome}-${formatDate(item.DtRend)}-${item.SaldoAnt}-${item.Saldo}-${item.Valor}`} key={index}>
+                    <td>{formatDate(item.DtRend)}</td>
                     <td>{item.Instituicao}</td>
                     <td className="text-end d-none d-md-table-cell">{formatCurrency(item.SaldoAnt)}</td>
                     <td className="text-end">{formatCurrency(item.Saldo)}</td>

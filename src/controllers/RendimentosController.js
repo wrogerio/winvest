@@ -1,10 +1,10 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = ` SELECT  r.Id, InstituicaoId, i.Nome AS Instituicao, Cast(DtRendimento AS DATE) AS DtRendimento, FORMAT(DtRendimento, 'yyyy-MM-dd') As DtRendimentoString, SaldoAnt, Saldo, Valor 
-                  FROM    Rendimentos r
-                          INNER JOIN Instituicoes i on InstituicaoId = i.Id
-                  ORDER   BY DtRendimento DESC`;
+  const query = ` SELECT  Id, InstituicaoId, Instituicao, DtRend, Ano, Bimestre, Trimestre, Quadrimestre, Semestre, Mes, MesNome, Dia, SaldoAnt, Saldo, Valor
+                  FROM    vRendimentos
+                  WHERE   DtRend >= CAST(CONCAT(YEAR(DATEADD(MONTH, -6, GETDATE())), '-', MONTH(DATEADD(MONTH, -4, GETDATE())), '-', 1) AS DATE)
+                  ORDER   BY DtRend DESC`;
   try {
     await pool.connect();
     const result = await pool.request().query(query);
@@ -15,11 +15,9 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT  r.Id, InstituicaoId, i.Nome AS Instituicao, Cast(DtRendimento AS DATE) AS DtRendimento, FORMAT(DtRendimento, 'yyyy-MM-dd') As DtRendimentoString, SaldoAnt, Saldo, Valor
-                  FROM    Rendimentos r
-                          INNER JOIN Instituicoes i on InstituicaoId = i.Id
-                  WHERE   r.Id = '${id}'`;
-  console.log(query);
+  const query = ` SELECT  Id, InstituicaoId, Instituicao, DtRend, Ano, Bimestre, Trimestre, Quadrimestre, Semestre, Mes, MesNome, Dia, SaldoAnt, Saldo, Valor
+                  FROM    vRendimentos
+                  WHERE   Id = '${id}'`;
   try {
     await pool.connect();
     const result = await pool.request().query(query);

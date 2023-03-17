@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { formatCurrency, formatDate, handleSearch, toFirstLetterUpperCase } from './../../helper/util';
+import { formatCurrency, formatDate, handleSearch, toFirstLetterUpperCase } from '@/helper/util';
 // services
-import { GetList, RemoveItem } from '../../services/EnviosService'
+import { GetList, RemoveItem } from '@/services/EnviosService'
 
 const Envios = () => {
   const urlRoot = "envios";

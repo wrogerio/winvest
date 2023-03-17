@@ -24,14 +24,18 @@ export function formatDate(value) {
   return `${day}/${month}/${year}`;
 }
 
-// Date to yyyy-mm-dd
+// Date to yyyy-mm-dd to PT-BR timezone
 export function formatDateISO(date) {
-  const d = new Date(date);
-  const month = `${d.getMonth() + 1}`;
-  const day = `${d.getDate()}`;
-  const year = d.getFullYear();
+  const dt = new Date(date);
 
-  return [year, month.length < 2 ? `0${month}` : month, day.length < 2 ? `0${day}` : day].join("-");
+  // add 3 hours to convert to PT-BR timezone
+  dt.setHours(dt.getHours() + 3);
+
+  const day = dt.getDate();
+  const month = dt.getMonth() + 1;
+  const year = dt.getFullYear();
+
+  return `${year}-${numberWith2Caracters(month)}-${numberWith2Caracters(day)}`;
 }
 
 // Number to currency
