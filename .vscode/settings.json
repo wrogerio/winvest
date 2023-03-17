@@ -10,6 +10,7 @@
 		".git*": true,
 		".next": true,
 		".vercel": true,
+		".vscode": true,
 		"*/**/_*.js": true,
 		"*lock*.*": true,
 		"jsconfig.json": true,

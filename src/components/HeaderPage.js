@@ -11,22 +11,22 @@ const HeaderPage = (props) => {
 
   switch (pageType) {
     case "cadastrar":
-      buttomClass = "btn btn-outline-primary";
+      buttomClass = "btn btn-sm btn-outline-primary";
       titleFormat = "mb-2 text-primary";
       linkToGo = "/" + title.toLowerCase() + "/"
       break;
     case "index":
-      buttomClass = "btn btn-outline-primary";
+      buttomClass = "btn btn-sm btn-outline-primary";
       titleFormat = "mb-2 text-primary";
       linkToGo = "/" + title.toLowerCase() + "/add-or-edit/0"
       break;
     case "remover":
-      buttomClass = "btn btn-outline-danger";
+      buttomClass = "btn btn-sm btn-outline-danger";
       titleFormat = "mb-2 text-danger";
       linkToGo = "/" + title.toLowerCase() + "/"
       break;
     case "alterar":
-      buttomClass = "btn btn-outline-warning";
+      buttomClass = "btn btn-sm btn-outline-warning";
       titleFormat = "mb-2 text-warning";
       linkToGo = "/" + title.toLowerCase() + "/"
       break;
@@ -38,7 +38,8 @@ const HeaderPage = (props) => {
         <div className="headerPageBg py-2 px-3">
           <div className="d-flex justify-content-between align-items-center">
             {
-              lenght && lenght != null ? <h3 className={titleFormat}>{title} - {numberWith2Caracters(lenght)}</h3> : <h3 className={titleFormat}>{title}</h3>}
+              lenght && lenght != null ? <h4 className={titleFormat}>{title} - {numberWith2Caracters(lenght)}</h4> : <h4 className={titleFormat}>{title}</h4>
+            }
             <Link href={linkToGo} className={buttomClass} accessKey={accessKey}>
               <i className={iconBt}></i>
               {textBt}
@@ -46,7 +47,7 @@ const HeaderPage = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

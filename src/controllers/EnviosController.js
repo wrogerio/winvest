@@ -1,7 +1,7 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString,  Cast(e.DtEnvio AS DATE) AS DtEnvio, e.TipoEnvio, e.Valor
+  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString, Cast(e.DtEnvio AS DATE) AS DtEnvio, e.TipoEnvio, e.Valor
                   FROM Envios e
                   INNER JOIN Instituicoes i on e.InstituicaoId = i.Id
                   ORDER BY e.DtEnvio DESC`;
@@ -16,7 +16,7 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString,  Cast(e.DtEnvio AS DATE) AS DtEnvio, e.TipoEnvio, e.Valor
+  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, FORMAT(e.DtEnvio, 'yyyy-MM-dd') As DtEnvioString, Cast(e.DtEnvio AS DATE) AS DtEnvio, e.TipoEnvio, e.Valor
                   FROM Envios e
                   INNER JOIN Instituicoes i on e.InstituicaoId = i.Id
                   WHERE e.Id = '${id}'`;

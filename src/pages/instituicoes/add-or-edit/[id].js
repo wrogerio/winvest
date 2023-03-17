@@ -42,8 +42,8 @@ const Index = () => {
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="cadastrar" accessKey="v" textBt="Voltar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Row>
-          <fieldset>
+        <fieldset>
+          <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Instituicao</Form.Label>
@@ -54,7 +54,9 @@ const Index = () => {
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>
             </Col>
-          </fieldset>
+          </Row>
+        </fieldset>
+        <Row>
           <Col>
             <Button ref={btSubmit} type="submit">Submit</Button>
           </Col>

@@ -104,12 +104,12 @@ const Index = () => {
               </Form.Group>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <Button ref={btSubmit} type="submit">Submit</Button>
-            </Col>
-          </Row>
         </fieldset>
+        <Row>
+          <Col>
+            <Button ref={btSubmit} type="submit">Submit</Button>
+          </Col>
+        </Row>
       </Form>
     </>
   );

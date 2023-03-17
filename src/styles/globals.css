@@ -4,7 +4,7 @@
 }
 
 th:last-child {
-	width: 70px !important;
+	width: 85px !important;
 	text-align: center;
 }
 
@@ -19,5 +19,5 @@ tr {
 td,
 th {
 	padding: 0.3rem 0.6rem !important;
-	font-size: 1.1rem !important;
+	font-size: 1rem !important;
 }
