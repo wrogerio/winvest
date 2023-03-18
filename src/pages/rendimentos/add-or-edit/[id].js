@@ -66,9 +66,6 @@ const Index = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="cadastrar" accessKey="v" textBt="Voltar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
-      <pre>
-        {JSON.stringify(item, null, 2)}
-      </pre>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <fieldset>
           <Row>

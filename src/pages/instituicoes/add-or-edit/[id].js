@@ -20,7 +20,10 @@ const Index = () => {
 
     if (form.checkValidity() !== false) {
       btSubmit.current.style.display = "none";
-      SaveItem(item).then((result) => {
+      SaveItem({
+        Id: item.Id,
+        Nome: item.Nome
+      }).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else console.log("Erro ao salvar");
       })
@@ -32,8 +35,8 @@ const Index = () => {
     const id = window.location.pathname.split("/").pop();
 
     if (id !== "0") {
-      GetItem(id.toLowerCase()).then(data => {
-        setItem(data);
+      GetItem(id.toLowerCase()).then(item => {
+        setItem({ Id: item.Id, Nome: item.Nome });
       })
     }
   }, [])

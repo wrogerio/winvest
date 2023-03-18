@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { formatCurrency, formatDate, handleSearch, toFirstLetterUpperCase } from '@/helper/util';
+import { toFirstLetterUpperCase, handleSearch, formatDate_DDMMYYYY, formatCurrency } from '@/helper/util';
 // services
 import { GetList, RemoveItem } from '@/services/EnviosService'
 
@@ -50,10 +50,10 @@ const Envios = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Instituicao}-${item.TipoEnvio}-${formatDate(item.DtEnvio)}-${formatCurrency(item.Valor)}-${item.Valor}`} key={index}>
+                  <tr data-search={`${item.Instituicao}-${item.TipoEnvio}-${formatDate_DDMMYYYY(item.DtEnvio)}-${formatCurrency(item.Valor)}-${item.Valor}`} key={index}>
                     <td>{item.Instituicao}</td>
                     <td className="d-none d-md-table-cell">{item.TipoEnvio}</td>
-                    <td className="d-none d-sm-table-cell">{formatDate(item.DtEnvio)}</td>
+                    <td className="d-none d-sm-table-cell">{formatDate_DDMMYYYY(item.DtEnvio)}</td>
                     <td className="text-end">{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>

@@ -4,7 +4,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 
 // components
 import HeaderPage from '@/components/HeaderPage';
-import { formatDateISO, toFirstLetterUpperCase } from "@/helper/util";
+import { nDateIso, toFirstLetterUpperCase, nDateIsoPlusOneDay } from "@/helper/util";
 import { SaveItem, GetItem } from "@/services/EnviosService";
 import { GetList } from "@/services/InstituicoesService";
 
@@ -14,7 +14,7 @@ const Index = () => {
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const btSubmit = useRef();
-  const [item, setItem] = useState({ InstituicaoId: '', DtEnvio: formatDateISO(new Date()), Valor: '', TipoEnvio: 'PIX' });
+  const [item, setItem] = useState({ InstituicaoId: '', DtEnvio: nDateIso(new Date()), Valor: '', TipoEnvio: 'PIX' });
   const [instituicoes, setInstituicoes] = useState([]);
 
   const handleSubmit = (event) => {
@@ -23,7 +23,13 @@ const Index = () => {
 
     if (form.checkValidity() !== false) {
       btSubmit.current.style.display = "none";
-      SaveItem(item).then((result) => {
+      SaveItem({
+        Id: item.Id,
+        InstituicaoId: item.InstituicaoId,
+        DtEnvio: nDateIsoPlusOneDay(item.DtEnvio),
+        Valor: item.Valor,
+        TipoEnvio: item.TipoEnvio
+      }).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else console.log("Erro ao salvar");
       })
@@ -42,7 +48,7 @@ const Index = () => {
     getInstituicoes().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
-          setItem({ InstituicaoId: item.InstituicaoId, DtEnvio: item.DtEnvioString, Valor: item.Valor });
+          setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtEnvio: item.DtEnvioString, TipoEnvio: item.TipoEnvio, Valor: item.Valor });
         })
       }
     });

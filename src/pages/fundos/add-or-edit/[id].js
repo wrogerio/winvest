@@ -6,7 +6,7 @@ import MaskedFormControl from 'react-bootstrap-maskedinput'
 
 // components
 import HeaderPage from '@/components/HeaderPage';
-import { formatDateISO, toFirstLetterUpperCase } from "@/helper/util";
+import { toFirstLetterUpperCase } from "@/helper/util";
 import { SaveItem, GetItem } from "@/services/FundosService";
 
 
@@ -23,7 +23,14 @@ const Index = () => {
 
     if (form.checkValidity() !== false) {
       btSubmit.current.style.display = "none";
-      SaveItem(item).then((result) => {
+      SaveItem({
+        Id: item.Id,
+        Sigla: item.Sigla,
+        Nome: item.Nome,
+        Cnpj: item.Cnpj,
+        Valor: item.Valor,
+        PVP: item.PVP
+      }).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else console.log("Erro ao salvar");
       })

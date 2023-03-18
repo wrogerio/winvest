@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { formatCurrency, formatDate, handleSearch, toFirstLetterUpperCase } from '@/helper/util';
+import { formatCurrency, formatDate_DDMMYYYY, handleSearch, toFirstLetterUpperCase } from '@/helper/util';
 // services
 import { GetList, RemoveItem } from '@/services/FundosService'
 
@@ -51,7 +51,7 @@ const Envios = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Sigla}-${item.Nome}-${formatDate(item.Cnpj)}-${formatCurrency(item.Valor)}-${item.Valor}-${formatCurrency(item.PVP)}-${item.PVP}`} key={index}>
+                  <tr data-search={`${item.Sigla}-${item.Nome}-${formatDate_DDMMYYYY(item.Cnpj)}-${formatCurrency(item.Valor)}-${item.Valor}-${formatCurrency(item.PVP)}-${item.PVP}`} key={index}>
                     <td>{item.Sigla}</td>
                     <td className="d-none d-md-table-cell">{item.Nome}</td>
                     <td className="d-none d-md-table-cell">{item.Cnpj}</td>

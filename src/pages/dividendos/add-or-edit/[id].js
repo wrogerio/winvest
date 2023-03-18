@@ -55,7 +55,6 @@ const Index = () => {
     let hour = dt.getHours();
     let min = dt.getMinutes();
     let sec = dt.getSeconds();
-    console.log(`${ano}-${mes}-${dia} ${hour}:${min}:${sec}`);
 
     const id = window.location.pathname.split("/").pop();
     getFundos().then(() => {
@@ -70,9 +69,6 @@ const Index = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="cadastrar" accessKey="v" textBt="Voltar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
-      <pre>
-        {JSON.stringify(item, null, 2)}
-      </pre>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <fieldset>
           <Row>
