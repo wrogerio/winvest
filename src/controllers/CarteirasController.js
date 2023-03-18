@@ -28,8 +28,8 @@ export const GetItem = async (id) => {
 };
 
 export const SaveItem = async (item) => {
-  const query = ` INSERT INTO Carteira (Id, FundoId, DtLancamento, Tipo, Qtd, Valor) 
-                  VALUES ('${item.Id}', '${item.FundoId}', '${item.DtLancamento}', '${item.Tipo}', '${item.Qtd}', '${item.Valor}')`;
+  const query = ` INSERT INTO Carteiras (FundoId, DtLancamento, Tipo, Qtd, Valor) 
+                  VALUES ('${item.FundoId}', '${item.DtLancamento}', '${item.Tipo}', '${item.Qtd}', '${item.Valor}')`;
   try {
     await pool.connect();
     await pool.request().query(query);

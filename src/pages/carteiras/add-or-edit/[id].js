@@ -5,16 +5,16 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 // components
 import HeaderPage from '@/components/HeaderPage';
 import { nDateIso, nDateIsoPlusOneDay, toFirstLetterUpperCase } from "@/helper/util";
-import { SaveItem, GetItem, GetLast } from "@/services/RendimentosService";
-import { GetList } from "@/services/InstituicoesService";
+import { SaveItem, GetItem, GetLast } from "@/services/CarteirasService";
+import { GetList } from "@/services/FundosService";
 
 const Index = () => {
   const urlRoot = "carteiras";
   const router = useRouter();
   const [validated, setValidated] = useState(false);
-  const [instituicoes, setInstituicoes] = useState([]);
+  const [fundos, setFundos] = useState([]);
   const btSubmit = useRef();
-  const [item, setItem] = useState({ InstituicaoId: "", DtRendimento: nDateIso(new Date()), SaldoAnt: 0, Saldo: 0 });
+  const [item, setItem] = useState({ FundoId: "", DtLancamento: nDateIso(new Date()), Tipo: "COMPRA", Qtd: 0, Valor: 0 });
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -24,10 +24,8 @@ const Index = () => {
       btSubmit.current.style.display = "none";
       SaveItem(
         {
-          InstituicaoId: item.InstituicaoId,
-          DtRendimento: nDateIsoPlusOneDay(item.DtRendimento),
-          SaldoAnt: item.SaldoAnt,
-          Saldo: item.Saldo
+          ...item,
+          DtLancamento: nDateIsoPlusOneDay(item.DtLancamento),
         }
       ).then((result) => {
         if (result) router.push(`/${urlRoot}`);
@@ -37,28 +35,25 @@ const Index = () => {
     setValidated(true);
   };
 
-  const getLast = async () => {
-    GetLast().then(data => {
-      setItem({ ...item, SaldoAnt: data.Saldo });
-    })
-  }
-
-  const getInstituicoes = async () => {
+  const getFundos = async () => {
     GetList().then(data => {
-      setInstituicoes(data);
+      setFundos(data);
     })
   }
 
   useEffect(() => {
     const id = window.location.pathname.split("/").pop();
-    getInstituicoes().then(() => {
+    getFundos().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
-          setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: nDateIso(item.DtRend), SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
+          setItem({
+            FundoId: item.FundoId,
+            DtLancamento: nDateIso(item.DtLancamentoDt),
+            Tipo: item.Tipo,
+            Qtd: item.Qtd,
+            Valor: item.Valor,
+          });
         })
-      }
-      else {
-        getLast();
       }
     })
   }, [])
@@ -70,46 +65,60 @@ const Index = () => {
         <fieldset>
           <Row>
             <Col xs={12} lg={2} >
-              <Form.Group className="mb-3" controlId="DtRendimento">
-                <Form.Label>Data Rendimento</Form.Label>
-                <Form.Control type="date" required name="DtRendimento" value={item.DtRendimento} onChange={e => setItem({ ...item, DtRendimento: e.target.value })} />
+              <Form.Group className="mb-3" controlId="DtLancamento">
+                <Form.Label>Data Lançamento</Form.Label>
+                <Form.Control autoFocus type="date" required name="DtLancamento" value={item.DtLancamento} onChange={e => setItem({ ...item, DtLancamento: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
-                  Informe a data do rendimento
+                  Informe a data de Lançamento
                 </Form.Control.Feedback>
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col xs={12} lg={6} >
-              <Form.Group className="mb-3" controlId="InstituicaoId">
-                <Form.Label>Instituicao</Form.Label>
-                <Form.Select autoFocus required name="InstituicaoId" value={item.InstituicaoId} onChange={e => setItem({ ...item, InstituicaoId: e.target.value })}>
+            <Col xs={12} lg={4} >
+              <Form.Group className="mb-3" controlId="FundoId">
+                <Form.Label>Fundo</Form.Label>
+                <Form.Select required name="FundoId" value={item.FundoId} onChange={e => setItem({ ...item, FundoId: e.target.value })}>
                   <option value="">Selecione</option>
-                  {instituicoes.map((item, index) => (
-                    <option key={index} value={item.Id}>{item.Nome}</option>
+                  {fundos.map((item, index) => (
+                    <option key={index} value={item.Id}>{item.Sigla}</option>
                   ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
-                  Selecione a instituição
+                  Selecione o fundo
+                </Form.Control.Feedback>
+                <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col xs={12} lg={2} >
+              <Form.Group className="mb-3" controlId="FundoId">
+                <Form.Label>Tipo</Form.Label>
+                <Form.Select required name="FundoId" value={item.Tipo} onChange={e => setItem({ ...item, Tipo: e.target.value })}>
+                  <option value="">Selecione</option>
+                  <option value="Compra">Compra</option>
+                  <option value="Venda">Venda</option>
+                </Form.Select>
+                <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
+                  Selecione o fundo
                 </Form.Control.Feedback>
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="SaldoAnt">
-                <Form.Label>Saldo Anterior</Form.Label>
-                <Form.Control type="number" step={0.01} required name="SaldoAnt" value={item.SaldoAnt} onChange={e => setItem({ ...item, SaldoAnt: e.target.value })} />
+                <Form.Label>Qtd</Form.Label>
+                <Form.Control type="number" step={0} required name="Qtd" value={item.Qtd} onChange={e => setItem({ ...item, Qtd: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
-                  Informe o saldo anterior
+                  Informe a quantidade
                 </Form.Control.Feedback>
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="Saldo">
-                <Form.Label>Saldo</Form.Label>
-                <Form.Control type="number" step={0.01} required name="Saldo" value={item.Saldo} onChange={e => setItem({ ...item, Saldo: e.target.value })} />
+                <Form.Label>Valor</Form.Label>
+                <Form.Control type="number" step={0.01} required name="Valor" value={item.Valor} onChange={e => setItem({ ...item, Valor: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
-                  Informe o saldo anterior
+                  Informe o valor
                 </Form.Control.Feedback>
                 <Form.Control.Feedback className="bg-success text-white p-2 rounded">Perfeito!</Form.Control.Feedback>
               </Form.Group>

@@ -18,14 +18,8 @@ export const GetItem = async (id) => {
   return data;
 }
 
-export const GetLast = async () => {
-  const response = await fetch(`/api/carteiras/last`);
-  const data = await response.json();
-  return data;
-}
-
 export const SaveItem = async (item) => {
-
+  console.log(item);
   //check if item contains an id
   if (item.Id) {
     const response = await fetch(`/api/carteiras/add-or-edit/${item.Id}`, {

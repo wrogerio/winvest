@@ -25,11 +25,7 @@ const Index = () => {
       btSubmit.current.style.display = "none";
 
       SaveItem({
-        Id: item.Id,
-        FundoId: item.FundoId,
-        DtDividendo: nDateIsoPlusOneDay(item.DtDividendo),
-        Qtd: item.Qtd,
-        Valor: item.Valor
+        ...item, DtDividendo: nDateIsoPlusOneDay(item.DtDividendo)
       }).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else {
@@ -48,14 +44,6 @@ const Index = () => {
   }
 
   useEffect(() => {
-    let dt = new Date();
-    let ano = dt.getFullYear();
-    let mes = dt.getMonth() + 1;
-    let dia = dt.getDate();
-    let hour = dt.getHours();
-    let min = dt.getMinutes();
-    let sec = dt.getSeconds();
-
     const id = window.location.pathname.split("/").pop();
     getFundos().then(() => {
       if (id !== "0") {
