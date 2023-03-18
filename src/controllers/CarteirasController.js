@@ -1,10 +1,10 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = ` SELECT  Id, FundoId, Sigla, Fundo, Cnpj, DtDiv, Qtd, Valor, Total
-                  FROM    vDividendos
-                  WHERE   DtDiv >= CAST(CONCAT(YEAR(DATEADD(MONTH, -6, GETDATE())), '-', MONTH(DATEADD(MONTH, -4, GETDATE())), '-', 1) AS DATE)
-                  ORDER   BY DtDiv DESC`;
+  const query = ` SELECT  Id, FundoId, Sigla, DtLancamentoDt, Ano, Mes, Dia, MesNome, Tipo, Qtd, Valor, Total 
+                  FROM    vCarteiras
+                  WHERE   DtLancamentoDt >= CAST(CONCAT(YEAR(DATEADD(MONTH, -6, GETDATE())), '-', MONTH(DATEADD(MONTH, -4, GETDATE())), '-', 1) AS DATE)
+                  ORDER   BY DtLancamentoDt`;
   try {
     await pool.connect();
     const result = await pool.request().query(query);
@@ -15,8 +15,8 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT  Id, FundoId, Sigla, Fundo, Cnpj, DtDiv, Ano, Mes, Dia, MesNome, Qtd, Valor, Total
-                  FROM    vDividendos
+  const query = ` SELECT  Id, FundoId, Sigla, DtLancamentoDt, Ano, Mes, Dia, MesNome, Tipo, Qtd, Valor, Total 
+                  FROM    vCarteiras
                   WHERE   Id = '${id}'`;
   try {
     await pool.connect();
@@ -28,8 +28,8 @@ export const GetItem = async (id) => {
 };
 
 export const SaveItem = async (item) => {
-  const query = ` INSERT INTO Dividendos (Id, FundoId, DtDividendo, Ano, Mes, Dia, MesNome, Qtd, Valor, CreateAt) 
-                  VALUES (DEFAULT, '${item.FundoId}', '${item.DtDividendo}', '${item.Qtd}', '${item.Valor}', DEFAULT)`;
+  const query = ` INSERT INTO Carteira (Id, FundoId, DtLancamento, Tipo, Qtd, Valor) 
+                  VALUES ('${item.Id}', '${item.FundoId}', '${item.DtLancamento}', '${item.Tipo}', '${item.Qtd}', '${item.Valor}')`;
   try {
     await pool.connect();
     await pool.request().query(query);
@@ -40,11 +40,12 @@ export const SaveItem = async (item) => {
 }
 
 export const UpdateItem = async (item) => {
-  const query = ` UPDATE Dividendos SET 
+  const query = ` UPDATE Carteiras SET 
                   FundoId = '${item.FundoId}',
-                  DtDividendo = '${item.DtDividendo}',
+                  DtLancamento = '${item.DtLancamento}',
+                  Tipo = '${item.Tipo}',
                   Qtd = '${item.Qtd}',
-                  Valor = '${item.Valor}' 
+                  Valor = '${item.Valor}'
                   WHERE Id = '${item.Id}'`;
   try {
     await pool.connect();
@@ -56,7 +57,7 @@ export const UpdateItem = async (item) => {
 }
 
 export const RemoveItem = async (id) => {
-  const query = ` DELETE FROM Dividendos WHERE Id = '${id}'`;
+  const query = ` DELETE FROM Carteiras WHERE Id = '${id}'`;
 
   try {
     await pool.connect();

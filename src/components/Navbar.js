@@ -57,6 +57,12 @@ const Navbar = () => {
                 Dividendos
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className={currentRoute == "/carteiras" ? "nav-link active" : "nav-link"} href="/carteiras" onClick={() => toggleMenu()}>
+                <i className="fas fa-wallet me-1"></i>
+                Carteiras
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
