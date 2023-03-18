@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { handleSearch, toFirstLetterUpperCase, formatDate, formatCurrency } from '@/helper/util';
+import { formatDate_DDMMYYYY, toFirstLetterUpperCase, handleSearch, formatCurrency } from '@/helper/util';
 // services
 import { GetList, RemoveItem } from '@/services/DividendosService'
 
@@ -53,7 +53,7 @@ const Instituicoes = () => {
                 Array.isArray(lista) && lista.map((item, index) => (
                   <tr data-search={`${item.Nome}`} key={index}>
                     <td>{item.Sigla}</td>
-                    <td>{formatDate(item.DtDiv)}</td>
+                    <td>{formatDate_DDMMYYYY(item.DtDiv)}</td>
                     <td className="d-none d-md-table-cell">{item.Qtd}</td>
                     <td className="text-end d-none d-md-table-cell">{formatCurrency(item.Valor)}</td>
                     <td className="text-end">{formatCurrency(item.Total)}</td>

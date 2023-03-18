@@ -4,7 +4,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 
 // components
 import HeaderPage from '@/components/HeaderPage';
-import { formatDateISO, toFirstLetterUpperCase } from "@/helper/util";
+import { nDateIso, nDateIsoPlusOneDay, toFirstLetterUpperCase } from "@/helper/util";
 import { SaveItem, GetItem, GetLast } from "@/services/RendimentosService";
 import { GetList } from "@/services/InstituicoesService";
 
@@ -14,7 +14,7 @@ const Index = () => {
   const [validated, setValidated] = useState(false);
   const [instituicoes, setInstituicoes] = useState([]);
   const btSubmit = useRef();
-  const [item, setItem] = useState({ InstituicaoId: "", DtRendimento: formatDateISO(new Date()), SaldoAnt: 0, Saldo: 0 });
+  const [item, setItem] = useState({ InstituicaoId: "", DtRendimento: nDateIso(new Date()), SaldoAnt: 0, Saldo: 0 });
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -22,7 +22,14 @@ const Index = () => {
 
     if (form.checkValidity() !== false) {
       btSubmit.current.style.display = "none";
-      SaveItem(item).then((result) => {
+      SaveItem(
+        {
+          InstituicaoId: item.InstituicaoId,
+          DtRendimento: nDateIsoPlusOneDay(item.DtRendimento),
+          SaldoAnt: item.SaldoAnt,
+          Saldo: item.Saldo
+        }
+      ).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else console.log("Erro ao salvar");
       })
@@ -47,7 +54,7 @@ const Index = () => {
     getInstituicoes().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
-          setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: formatDateISO(item.DtRend), SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
+          setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: nDateIso(item.DtRend), SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
         })
       }
       else {
@@ -59,6 +66,9 @@ const Index = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="cadastrar" accessKey="v" textBt="Voltar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
+      <pre>
+        {JSON.stringify(item, null, 2)}
+      </pre>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <fieldset>
           <Row>

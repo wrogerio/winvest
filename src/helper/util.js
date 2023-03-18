@@ -14,7 +14,7 @@ export function toFirstLetterUpperCase(str) {
 }
 
 // convert string yyyy-MM-dd to dd/mm/yyyy
-export function formatDate(value) {
+export function formatDate_DDMMYYYY(value) {
   const values = value.split('T')[0].split("-");
 
   const day = parseInt(values[2] < 10) ? "0" + values[2] : values[2];
@@ -22,20 +22,6 @@ export function formatDate(value) {
   const year = values[0];
 
   return `${day}/${month}/${year}`;
-}
-
-// Date to yyyy-mm-dd to PT-BR timezone
-export function formatDateISO(date) {
-  const dt = new Date(date);
-
-  // add 3 hours to convert to PT-BR timezone
-  dt.setHours(dt.getHours() + 3);
-
-  const day = dt.getDate();
-  const month = dt.getMonth() + 1;
-  const year = dt.getFullYear();
-
-  return `${year}-${numberWith2Caracters(month)}-${numberWith2Caracters(day)}`;
 }
 
 // Number to currency
@@ -57,4 +43,23 @@ export const handleSearch = (termo) => {
       }
     })
   })
+}
+
+
+export const nDateIso = (d) => {
+  const date = new Date(d);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+}
+
+export const nDateIsoPlusOneDay = (d) => {
+  const date = new Date(d);
+  // add one day
+  date.setDate(date.getDate() + 1);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
 }
