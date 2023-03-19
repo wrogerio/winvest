@@ -34,9 +34,6 @@ const Instituicoes = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} lenght={lista.length} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
-      <pre>
-        {JSON.stringify(lista[0], null, 2)}
-      </pre>
       <Row>
         <Col className="m-0">
           <input type="text" autoFocus className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
