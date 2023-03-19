@@ -42,6 +42,7 @@ const Instituicoes = () => {
               <tr>
                 <th>Ano</th>
                 <th>Mes</th>
+                <th className="d-none d-md-table-cell">Data</th>
                 <th>Sigla</th>
                 <th className="d-none d-md-table-cell">Tipo</th>
                 <th>Qtd</th>
@@ -56,6 +57,7 @@ const Instituicoes = () => {
                   <tr className={item.Tipo == 'Venda' ? 'text-danger fw-bold' : ''} data-search={`${formatDate_DDMMYYYY(item.DtLancamentoDt)}-${item.Sigla}-${item.Ano}-${item.Mes}-${item.Dia}-${item.MesNome}-${item.Qtd}-${item.Valor}-${item.Total}`} key={index}>
                     <td>{item.Ano}</td>
                     <td>{item.Mes}</td>
+                    <td className="d-none d-md-table-cell">{formatDate_DDMMYYYY(item.DtLancamento)}</td>
                     <td>{item.Sigla}</td>
                     <td className="d-none d-md-table-cell">{item.Tipo}</td>
                     <td>{item.Qtd}</td>
