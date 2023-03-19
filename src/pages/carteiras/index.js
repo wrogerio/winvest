@@ -43,6 +43,7 @@ const Instituicoes = () => {
                 <th>Ano</th>
                 <th>Mes</th>
                 <th>Sigla</th>
+                <th className="d-none d-md-table-cell">Tipo</th>
                 <th>Qtd</th>
                 <th className="d-none d-md-table-cell">Valor</th>
                 <th className="d-none d-md-table-cell">Total</th>
@@ -52,10 +53,11 @@ const Instituicoes = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${formatDate_DDMMYYYY(item.DtLancamentoDt)}-${item.Sigla}-${item.Ano}-${item.Mes}-${item.Dia}-${item.MesNome}-${item.Qtd}-${item.Valor}-${item.Total}`} key={index}>
+                  <tr className={item.Tipo == 'Venda' ? 'text-danger fw-bold' : ''} data-search={`${formatDate_DDMMYYYY(item.DtLancamentoDt)}-${item.Sigla}-${item.Ano}-${item.Mes}-${item.Dia}-${item.MesNome}-${item.Qtd}-${item.Valor}-${item.Total}`} key={index}>
                     <td>{item.Ano}</td>
                     <td>{item.Mes}</td>
                     <td>{item.Sigla}</td>
+                    <td className="d-none d-md-table-cell">{item.Tipo}</td>
                     <td>{item.Qtd}</td>
                     <td className="d-none d-md-table-cell">{formatCurrency(item.Valor)}</td>
                     <td className="d-none d-md-table-cell">{formatCurrency(item.Total)}</td>
