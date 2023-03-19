@@ -19,7 +19,6 @@ export const GetItem = async (id) => {
 }
 
 export const SaveItem = async (item) => {
-  console.log(item);
   //check if item contains an id
   if (item.Id) {
     const response = await fetch(`/api/carteiras/add-or-edit/${item.Id}`, {
