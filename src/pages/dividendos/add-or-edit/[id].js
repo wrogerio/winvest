@@ -73,7 +73,7 @@ const Index = () => {
       if (parseInt(localStorage.getItem("valor")) == 5) {
         localStorage.setItem("valor", 0)
         const valor = item.Valor / item.Qtd;
-        setItem({ ...item, Valor: valor });
+        setItem({ ...item, Valor: valor.toFixed(2) });
       }
     }
   }
