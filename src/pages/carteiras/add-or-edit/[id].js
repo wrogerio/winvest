@@ -46,10 +46,11 @@ const Index = () => {
     getFundos().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
+          console.log(item);
           setItem({
             Id: item.Id,
             FundoId: item.FundoId,
-            DtLancamento: nDateIso(item.DtLancamentoDt),
+            DtLancamento: nDateIso(item.DtLancamento),
             Tipo: item.Tipo,
             Qtd: item.Qtd,
             Valor: item.Valor,
@@ -62,6 +63,9 @@ const Index = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="cadastrar" accessKey="v" textBt="Voltar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
+      <pre>
+        {JSON.stringify(item, null, 2)}
+      </pre>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <fieldset>
           <Row>

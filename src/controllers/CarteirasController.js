@@ -1,7 +1,7 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = ` SELECT  Id, FundoId, Sigla, DtLancamentoDt, Ano, Mes, Dia, MesNome, Tipo, Qtd, Valor, Total 
+  const query = ` SELECT  Id, FundoId, Sigla, DtLancamento, DtLancamentoDt, Ano, Mes, Dia, MesNome, Tipo, Qtd, Valor, Total 
                   FROM    vCarteiras
                   WHERE   DtLancamentoDt >= CAST(CONCAT(YEAR(DATEADD(YEAR, -3, GETDATE())), '-', MONTH(DATEADD(MONTH, -4, GETDATE())), '-', 1) AS DATE)
                   ORDER   BY DtLancamentoDt`;
@@ -15,7 +15,7 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = ` SELECT  Id, FundoId, Sigla, DtLancamentoDt, Ano, Mes, Dia, MesNome, Tipo, Qtd, Valor, Total 
+  const query = ` SELECT  Id, FundoId, Sigla, DtLancamento, DtLancamentoDt, Ano, Mes, Dia, MesNome, Tipo, Qtd, Valor, Total 
                   FROM    vCarteiras
                   WHERE   Id = '${id}'`;
   try {

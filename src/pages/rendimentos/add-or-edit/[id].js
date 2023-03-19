@@ -54,7 +54,7 @@ const Index = () => {
     getInstituicoes().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
-          setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: nDateIso(item.DtRend), SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
+          setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: nDateIso(item.DtRendimento), SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
         })
       }
       else {

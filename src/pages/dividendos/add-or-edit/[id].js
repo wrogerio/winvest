@@ -48,7 +48,7 @@ const Index = () => {
     getFundos().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
-          setItem({ Id: item.Id, FundoId: item.FundoId, DtDividendo: nDateIso(item.DtDiv), Qtd: item.Qtd, Valor: item.Valor });
+          setItem({ Id: item.Id, FundoId: item.FundoId, DtDividendo: nDateIso(item.DtDividendo), Qtd: item.Qtd, Valor: item.Valor });
         })
       }
     })
