@@ -50,7 +50,7 @@ const Index = () => {
     if (e.code == 'ControlLeft') {
       localStorage.setItem("qtd", parseInt(localStorage.getItem("qtd")) + 1)
 
-      if (parseInt(localStorage.getItem("qtd")) == 5) {
+      if (parseInt(localStorage.getItem("qtd")) == 3) {
         localStorage.setItem("qtd", 0)
 
         const ano = item.DtDividendo.split("-")[0];
@@ -70,7 +70,7 @@ const Index = () => {
     if (e.code == 'ControlLeft') {
       localStorage.setItem("valor", parseInt(localStorage.getItem("valor")) + 1)
 
-      if (parseInt(localStorage.getItem("valor")) == 5) {
+      if (parseInt(localStorage.getItem("valor")) == 3) {
         localStorage.setItem("valor", 0)
         const valor = item.Valor / item.Qtd;
         setItem({ ...item, Valor: valor.toFixed(2) });
