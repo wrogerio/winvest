@@ -48,26 +48,39 @@ const Index = () => {
 
   const handleConfereQtd = (e) => {
     if (e.code == 'ControlLeft') {
-      const ano = item.DtDividendo.split("-")[0];
-      const mes = item.DtDividendo.split("-")[1];
-      const sigla = fundoRef.current.options[fundoRef.current.selectedIndex].text.split(" - ")[0];
-      ConfereQtdSigla(ano, mes, sigla).then(data => {
-        if (data) {
-          setItem({ ...item, Qtd: data.Qtd });
-          valorRef.current.focus();
-        }
-      })
+      localStorage.setItem("qtd", parseInt(localStorage.getItem("qtd")) + 1)
+
+      if (parseInt(localStorage.getItem("qtd")) == 5) {
+        localStorage.setItem("qtd", 0)
+
+        const ano = item.DtDividendo.split("-")[0];
+        const mes = item.DtDividendo.split("-")[1];
+        const sigla = fundoRef.current.options[fundoRef.current.selectedIndex].text.split(" - ")[0];
+        ConfereQtdSigla(ano, mes, sigla).then(data => {
+          if (data) {
+            setItem({ ...item, Qtd: data.Qtd });
+            valorRef.current.focus();
+          }
+        })
+      }
     }
   }
 
-  const handleSubtracao = (e) => {
+  const handleDivisaoValor = (e) => {
     if (e.code == 'ControlLeft') {
-      const valor = item.Valor / item.Qtd;
-      setItem({ ...item, Valor: valor });
+      localStorage.setItem("valor", parseInt(localStorage.getItem("valor")) + 1)
+
+      if (parseInt(localStorage.getItem("valor")) == 5) {
+        localStorage.setItem("valor", 0)
+        const valor = item.Valor / item.Qtd;
+        setItem({ ...item, Valor: valor });
+      }
     }
   }
 
   useEffect(() => {
+    localStorage.setItem("qtd", 0)
+    localStorage.setItem("valor", 0)
     const id = window.location.pathname.split("/").pop();
     getFundos().then(() => {
       if (id !== "0") {
@@ -122,7 +135,7 @@ const Index = () => {
             <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="Saldo">
                 <Form.Label>Valor</Form.Label>
-                <Form.Control type="number" step={0.01} ref={valorRef} required name="Valor" value={item.Valor} onKeyDown={e => handleSubtracao(e)} onChange={e => setItem({ ...item, Valor: e.target.value })} />
+                <Form.Control type="number" step={0.01} ref={valorRef} required name="Valor" value={item.Valor} onKeyDown={e => handleDivisaoValor(e)} onChange={e => setItem({ ...item, Valor: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
                   Informe o valor
                 </Form.Control.Feedback>
