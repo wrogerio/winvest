@@ -60,6 +60,13 @@ const Index = () => {
     }
   }
 
+  const handleSubtracao = (e) => {
+    if (e.code == 'ControlLeft') {
+      const valor = item.Valor / item.Qtd;
+      setItem({ ...item, Valor: valor });
+    }
+  }
+
   useEffect(() => {
     const id = window.location.pathname.split("/").pop();
     getFundos().then(() => {
@@ -115,7 +122,7 @@ const Index = () => {
             <Col xs={12} lg={2} >
               <Form.Group className="mb-3" controlId="Saldo">
                 <Form.Label>Valor</Form.Label>
-                <Form.Control type="number" step={0.01} ref={valorRef} required name="Valor" value={item.Valor} onChange={e => setItem({ ...item, Valor: e.target.value })} />
+                <Form.Control type="number" step={0.01} ref={valorRef} required name="Valor" value={item.Valor} onKeyDown={e => handleSubtracao(e)} onChange={e => setItem({ ...item, Valor: e.target.value })} />
                 <Form.Control.Feedback type="invalid" className="bg-danger text-white p-2 rounded">
                   Informe o valor
                 </Form.Control.Feedback>
