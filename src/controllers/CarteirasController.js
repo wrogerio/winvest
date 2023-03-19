@@ -27,6 +27,17 @@ export const GetItem = async (id) => {
   }
 };
 
+export const ConfereQtdSigla = async (ano, mes, sigla) => {
+  const query = ` SELECT Sigla, Qtd, Valor, Total FROM fnCarteirasConferencia(${ano},${mes}, '${sigla}')`;
+  try {
+    await pool.connect();
+    const result = await pool.request().query(query);
+    return result.recordset.length > 0 ? result.recordset[0] : {};
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
 export const SaveItem = async (item) => {
   const query = ` INSERT INTO Carteiras (FundoId, DtLancamento, Tipo, Qtd, Valor) 
                   VALUES ('${item.FundoId}', '${item.DtLancamento}', '${item.Tipo}', '${item.Qtd}', '${item.Valor}')`;

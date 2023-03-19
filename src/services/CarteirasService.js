@@ -18,6 +18,12 @@ export const GetItem = async (id) => {
   return data;
 }
 
+export const ConfereQtdSigla = async (ano, mes, sigla) => {
+  const response = await fetch(`/api/carteiras/confere?ano=${ano}&mes=${mes}&sigla=${sigla}`);
+  const data = await response.json();
+  return data;
+}
+
 export const SaveItem = async (item) => {
   //check if item contains an id
   if (item.Id) {
