@@ -47,6 +47,7 @@ const Index = () => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
           setItem({
+            Id: item.Id,
             FundoId: item.FundoId,
             DtLancamento: nDateIso(item.DtLancamentoDt),
             Tipo: item.Tipo,
