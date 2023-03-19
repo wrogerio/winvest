@@ -34,6 +34,9 @@ const Instituicoes = () => {
   return (
     <>
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} lenght={lista.length} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
+      <pre>
+        {JSON.stringify(lista[0], null, 2)}
+      </pre>
       <Row>
         <Col className="m-0">
           <input type="text" autoFocus className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
@@ -51,7 +54,7 @@ const Instituicoes = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Sigla}-${item.Nome}-${formatDate_DDMMYYYY(item.DtDividendo)}-${formatCurrency(item.Valor)}-${item.Qtd}-${item.Total}`} key={index}>
+                  <tr data-search={`${item.Sigla}-${item.Nome}-${item.MesNome}-${formatDate_DDMMYYYY(item.DtDividendo)}-${formatCurrency(item.Valor)}-${item.Qtd}-${item.Total}`} key={index}>
                     <td>{item.Sigla}</td>
                     <td>{formatDate_DDMMYYYY(item.DtDividendo)}</td>
                     <td className="d-none d-md-table-cell">{item.Qtd}</td>

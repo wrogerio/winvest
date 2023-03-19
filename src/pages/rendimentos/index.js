@@ -51,7 +51,7 @@ const Instituicoes = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Instituicao}-${item.Ano}-${item.Mes}-${item.Dia}-${item.MesNome}-${formatDate_DDMMYYYY(item.DtRend)}-${item.SaldoAnt}-${item.Saldo}-${item.Valor}`} key={index}>
+                  <tr data-search={`${item.Instituicao}-${item.MesNome}-${formatDate_DDMMYYYY(item.DtRend)}-${item.SaldoAnt}-${item.Saldo}-${item.Valor}`} key={index}>
                     <td>{formatDate_DDMMYYYY(item.DtRend)}</td>
                     <td>{item.Instituicao}</td>
                     <td className="text-end d-none d-md-table-cell">{formatCurrency(item.SaldoAnt)}</td>
