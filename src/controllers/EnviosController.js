@@ -1,10 +1,11 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = ` SELECT e.Id, e.InstituicaoId, i.Nome AS Instituicao, DtEnvio, Ano, Mes, Dia, MesNome, e.TipoEnvio, e.Valor
-                  FROM Envios e
-                  INNER JOIN Instituicoes i on e.InstituicaoId = i.Id
-                  ORDER BY e.DtEnvio DESC`;
+  const query = ` SELECT  e.Id, e.InstituicaoId, i.Nome AS Instituicao, DtEnvio, Ano, Mes, Dia, MesNome, e.TipoEnvio, e.Valor
+                  FROM    Envios e
+                  INNER   JOIN Instituicoes i on e.InstituicaoId = i.Id
+                  WHERE   DtEnvio >= CAST(CONCAT(YEAR(DATEADD(YEAR, -3, GETDATE())), '-', MONTH(DATEADD(MONTH, -4, GETDATE())), '-', 1) AS DATE)
+                  ORDER   BY e.DtEnvio DESC`;
 
   try {
     await pool.connect();

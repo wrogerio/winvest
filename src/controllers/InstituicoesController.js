@@ -1,7 +1,9 @@
 import pool from "@/database/db";
 
 export const GetAll = async () => {
-  const query = "SELECT Id, Nome FROM Instituicoes Order By Nome";
+  const query = `SELECT   Id, Nome 
+                  FROM    Instituicoes 
+                  Order   By Nome`;
 
   try {
     await pool.connect();
@@ -13,7 +15,9 @@ export const GetAll = async () => {
 };
 
 export const GetItem = async (id) => {
-  const query = `SELECT Id, Nome FROM Instituicoes WHERE Id = '${id}'`;
+  const query = ` SELECT Id, Nome 
+                  FROM    Instituicoes 
+                  WHERE   Id = '${id}'`;
 
   try {
     await pool.connect();
