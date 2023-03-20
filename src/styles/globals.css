@@ -32,10 +32,14 @@ h6 {
 }
 
 .tbDash {
-	border: solid 1px #06b6d4;
+	border: solid 1px #292524;
 }
 .tbDash td,
 th {
 	text-align: center;
 	font-size: 1.1rem !important;
+}
+
+.tbDash th {
+	background-color: #d6d3d1 !important;
 }

@@ -15,7 +15,7 @@ const UltimosResultados = ({ lista, titulo }) => {
         <h3 className='text-primary fw-bold'>{titulo}</h3>
       </Card.Title>
       <Card.Body className='p-2 pt-0'>
-        <Table className='tbDash mb-0' striped bordered size='xs'>
+        <Table className='tbDash mb-0' bordered size='xs'>
           <thead>
             <tr>
               <th style={{ width: "33.3%" }}>{AbreviaMes(lista[2]?.MesNome)}</th>
