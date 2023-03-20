@@ -26,9 +26,8 @@ const Instituicoes = () => {
   useEffect(() => {
     GetList().then(data => {
       setLista(data);
-      setTotal(data.reduce((acc, cur) => acc + cur.Total, 0));
+      handleTotal();
     })
-    handleTotal();
   }, [])
 
   const handleTotal = () => {
@@ -39,7 +38,7 @@ const Instituicoes = () => {
         return acc + parseFloat(cur.innerText.replace("R$", "").replace(".", "").replace(",", ".").replace(" ", ""));
       }, 0);
       setTotal(total.toFixed(2));
-    }, 800);
+    }, 600);
   }
 
   useEffect(() => {

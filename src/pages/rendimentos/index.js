@@ -31,14 +31,14 @@ const Instituicoes = () => {
         return acc + parseFloat(cur.innerText.replace("R$", "").replace(".", "").replace(",", ".").replace(" ", ""));
       }, 0);
       setTotal(total.toFixed(2));
-    }, 800);
+    }, 600);
   }
 
   useEffect(() => {
     GetList().then(data => {
       setLista(data);
+      handleTotal();
     })
-    handleTotal();
   }, [])
 
   useEffect(() => {
