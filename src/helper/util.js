@@ -24,6 +24,17 @@ export function formatDate_DDMMYYYY(value) {
   return `${day}/${month}/${year}`;
 }
 
+// convert string yyyy-MM-dd to dd/mm/yy
+export function formatDate_DDMMYY(value) {
+  const values = value.split('T')[0].split("-");
+
+  const day = parseInt(values[2] < 10) ? "0" + values[2] : values[2];
+  const month = parseInt(values[1] < 10) ? "0" + values[1] : values[1];
+  const year = values[0].substring(2, 4);
+
+  return `${day}/${month}/${year}`;
+}
+
 // Number to currency
 export function formatCurrency(value) {
   value = parseFloat(value);

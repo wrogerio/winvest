@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { toFirstLetterUpperCase, handleSearch, formatDate_DDMMYYYY, formatCurrency } from '@/helper/util';
+import { toFirstLetterUpperCase, handleSearch, formatDate_DDMMYY, formatCurrency } from '@/helper/util';
 // services
 import { GetList, RemoveItem } from '@/services/RendimentosService'
 
@@ -56,7 +56,7 @@ const Instituicoes = () => {
             <thead>
               <tr>
                 <th>Data</th>
-                <th>Inst</th>
+                <th className="d-none d-md-table-cell">Inst</th>
                 <th className="d-none d-md-table-cell">SaldoAnt</th>
                 <th>Saldo</th>
                 <th className="d-none d-md-table-cell">Valor</th>
@@ -66,9 +66,9 @@ const Instituicoes = () => {
             <tbody>
               {
                 Array.isArray(lista) && lista.map((item, index) => (
-                  <tr data-search={`${item.Instituicao}-${item.MesNome}-${formatDate_DDMMYYYY(item.DtRend)}-${item.SaldoAnt}-${item.Saldo}-${item.Valor}`} key={index}>
-                    <td>{formatDate_DDMMYYYY(item.DtRend)}</td>
-                    <td>{item.Instituicao}</td>
+                  <tr data-search={`${item.Instituicao}-${item.MesNome}-${formatDate_DDMMYY(item.DtRend)}-${item.SaldoAnt}-${item.Saldo}-${item.Valor}`} key={index}>
+                    <td>{formatDate_DDMMYY(item.DtRend)}</td>
+                    <td className="d-none d-md-table-cell">{item.Instituicao}</td>
                     <td className="text-end d-none d-md-table-cell">{formatCurrency(item.SaldoAnt)}</td>
                     <td className="text-end">{formatCurrency(item.Saldo)}</td>
                     <td className="text-end d-none d-md-table-cell tdTotal">{formatCurrency(item.Valor)}</td>
