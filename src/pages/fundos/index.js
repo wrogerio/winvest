@@ -36,7 +36,7 @@ const Envios = () => {
       <HeaderPage title={toFirstLetterUpperCase(urlRoot)} lenght={lista.length} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
       <Row>
         <Col className="m-0">
-          <input type="text" autoFocus className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
+          <input type="text" className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
           <Table bordered hover>
             <thead>
               <tr>
