@@ -31,7 +31,11 @@ h6 {
 	margin: 0;
 }
 
+.tbDash {
+	border: solid 1px #06b6d4;
+}
 .tbDash td,
 th {
 	text-align: center;
+	font-size: 1.1rem !important;
 }

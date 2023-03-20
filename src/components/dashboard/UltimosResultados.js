@@ -14,7 +14,7 @@ const UltimosResultados = ({ lista, titulo }) => {
       <Card.Title className='p-1 text-center mb-0'>
         <h3 className='text-primary fw-bold'>{titulo}</h3>
       </Card.Title>
-      <Card.Body className='p-2'>
+      <Card.Body className='p-2 pt-0'>
         <Table className='tbDash mb-0' striped bordered size='xs'>
           <thead>
             <tr>
