@@ -24,10 +24,8 @@ const Index = () => {
       btSubmit.current.style.display = "none";
       SaveItem(
         {
+          ...item,
           InstituicaoId: item.InstituicaoId,
-          DtRendimento: nDateIsoPlusOneDay(item.DtRendimento),
-          SaldoAnt: item.SaldoAnt,
-          Saldo: item.Saldo
         }
       ).then((result) => {
         if (result) router.push(`/${urlRoot}`);

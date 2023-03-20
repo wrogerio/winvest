@@ -24,11 +24,8 @@ const Index = () => {
     if (form.checkValidity() !== false) {
       btSubmit.current.style.display = "none";
       SaveItem({
-        Id: item.Id,
-        InstituicaoId: item.InstituicaoId,
+        ...item,
         DtEnvio: nDateIsoPlusOneDay(item.DtEnvio),
-        Valor: item.Valor,
-        TipoEnvio: item.TipoEnvio
       }).then((result) => {
         if (result) router.push(`/${urlRoot}`);
         else console.log("Erro ao salvar");
