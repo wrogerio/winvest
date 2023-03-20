@@ -6,6 +6,7 @@ const HeaderPage = (props) => {
   let buttomClass = "";
   let buttomText = "";
   let titleFormat = "";
+  let totalFormat = "";
   let redirect = "";
   let linkToGo = "";
 
@@ -13,21 +14,25 @@ const HeaderPage = (props) => {
     case "cadastrar":
       buttomClass = "btn btn-sm btn-outline-primary";
       titleFormat = "mb-2 text-primary";
+      totalFormat = "d-none d-md-block d-none mb-2 text-primary";
       linkToGo = "/" + title.toLowerCase() + "/"
       break;
     case "index":
       buttomClass = "btn btn-sm btn-outline-primary";
       titleFormat = "mb-2 text-primary";
+      totalFormat = "d-none d-md-block mb-2 text-primary";
       linkToGo = "/" + title.toLowerCase() + "/add-or-edit/0"
       break;
     case "remover":
       buttomClass = "btn btn-sm btn-outline-danger";
       titleFormat = "mb-2 text-danger";
+      totalFormat = "d-none d-md-block mb-2 text-danger";
       linkToGo = "/" + title.toLowerCase() + "/"
       break;
     case "alterar":
       buttomClass = "btn btn-sm btn-outline-warning";
       titleFormat = "mb-2 text-warning";
+      totalFormat = "d-none d-md-block mb-2 text-warning";
       linkToGo = "/" + title.toLowerCase() + "/"
       break;
   }
@@ -42,7 +47,7 @@ const HeaderPage = (props) => {
             }
 
             {
-              total && total != undefined ? <h4 className={titleFormat}>{formatCurrency(total)}</h4> : ""
+              total && total != undefined ? <h4 className={totalFormat}>{formatCurrency(total)}</h4> : ""
             }
 
             <Link href={linkToGo} className={buttomClass} accessKey={accessKey}>
