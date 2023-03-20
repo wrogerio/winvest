@@ -30,7 +30,6 @@ export const GetItem = async (id) => {
 export const SaveItem = async (item) => {
   const query = ` INSERT INTO Dividendos (FundoId, DtDividendo, Qtd, Valor) 
                   VALUES ('${item.FundoId}', '${item.DtDividendo}', '${item.Qtd}', '${item.Valor}')`;
-  console.log(query);
   try {
     await pool.connect();
     await pool.request().query(query);

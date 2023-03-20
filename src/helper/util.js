@@ -36,8 +36,9 @@ export const handleSearch = (termo) => {
   const trs = document.querySelectorAll("tbody tr");
   trs.forEach(tr => {
     tr.classList.remove("d-none");
-    const dataSearch = tr.getAttribute("data-search").toLowerCase();
+    const dataSearch = removeAcentuacao(tr.getAttribute("data-search").toLowerCase());
     termos.forEach(termo => {
+      termo = removeAcentuacao(termo);
       if (!dataSearch.includes(termo)) {
         tr.classList.add("d-none");
       }
@@ -62,4 +63,20 @@ export const nDateIsoPlusOneDay = (d) => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+}
+
+export const removeAcentuacao = (str) => {
+  str = str.replace(/[ÀÁÂÃÄÅ]/, "A");
+  str = str.replace(/[àáâãäå]/, "a");
+  str = str.replace(/[ÈÉÊË]/, "E");
+  str = str.replace(/[èéêë]/, "e");
+  str = str.replace(/[ÌÍÎÏ]/, "I");
+  str = str.replace(/[ìíîï]/, "i");
+  str = str.replace(/[ÒÓÔÕÖ]/, "O");
+  str = str.replace(/[òóôõö]/, "o");
+  str = str.replace(/[ÙÚÛÜ]/, "U");
+  str = str.replace(/[ùúûü]/, "u");
+  str = str.replace(/[Ç]/, "C");
+  str = str.replace(/[ç]/, "c");
+  return str;
 }

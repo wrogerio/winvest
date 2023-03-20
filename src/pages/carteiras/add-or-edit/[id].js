@@ -46,7 +46,6 @@ const Index = () => {
     getFundos().then(() => {
       if (id !== "0") {
         GetItem(id.toLowerCase()).then(item => {
-          console.log(item);
           setItem({
             Id: item.Id,
             FundoId: item.FundoId,
