@@ -93,7 +93,7 @@ const Instituicoes = () => {
       </Row>
       <Row>
         <Col className="m-0">
-          <input type="text" autoFocus className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
+          <input type="text" className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />
           <Table bordered hover>
             <thead>
               <tr>
