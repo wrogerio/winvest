@@ -99,3 +99,34 @@ export const removeAcentuacao = (str) => {
   str = str.replace(/[ç]/, "c");
   return str;
 }
+
+export const AbreviaMes = (mes) => {
+  switch (mes) {
+    case "Janeiro":
+      return "Jan";
+    case "Fevereiro":
+      return "Fev";
+    case "Março":
+      return "Mar";
+    case "Abril":
+      return "Abr";
+    case "Maio":
+      return "Mai";
+    case "Junho":
+      return "Jun";
+    case "Julho":
+      return "Jul";
+    case "Agosto":
+      return "Ago";
+    case "Setembro":
+      return "Set";
+    case "Outubro":
+      return "Out";
+    case "Novembro":
+      return "Nov";
+    case "Dezembro":
+      return "Dez";
+    default:
+      return "";
+  }
+}
