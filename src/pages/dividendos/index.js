@@ -28,6 +28,7 @@ const Instituicoes = () => {
       setLista(data);
       setTotal(data.reduce((acc, cur) => acc + cur.Total, 0));
     })
+    handleTotal();
   }, [])
 
   const handleTotal = () => {
