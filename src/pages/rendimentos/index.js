@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Col, Row, Table } from 'react-bootstrap';
+import { Card, Col, Row, Table } from 'react-bootstrap';
 // components
 import HeaderPage from "@/components/HeaderPage";
-import { toFirstLetterUpperCase, handleSearch, formatDate_DDMMYY, formatCurrency } from '@/helper/util';
+import { toFirstLetterUpperCase, handleSearch, formatDate_DDMMYY, formatCurrency, getDaysInMonth } from '@/helper/util';
 // services
 import { GetList, RemoveItem } from '@/services/RendimentosService'
 
@@ -48,7 +48,49 @@ const Instituicoes = () => {
 
   return (
     <>
-      <HeaderPage title={toFirstLetterUpperCase(urlRoot)} lenght={listaTotal} total={total} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
+      <HeaderPage title={toFirstLetterUpperCase(urlRoot)} pageType="index" accessKey="c" textBt="Cadastrar" iconBt="fas fa-plus-circle me-2"></HeaderPage>
+      <Row>
+        <Col xs={6} md={3}>
+          <Card>
+            <Card.Title className="p-1 text-center mb-0 text-danger">
+              Registros
+            </Card.Title>
+            <Card.Body className="p-1">
+              <h3 className="text-center fw-bold">{listaTotal}</h3>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={6} md={3} className="mb-2">
+          <Card>
+            <Card.Title className="p-1 text-center mb-0 text-danger">
+              Total
+            </Card.Title>
+            <Card.Body className="p-1">
+              <h3 className="text-center fw-bold">{formatCurrency(total)}</h3>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={6} md={3} className="mb-2">
+          <Card>
+            <Card.Title className="p-1 text-center mb-0 text-danger">
+              Média
+            </Card.Title>
+            <Card.Body className="p-1">
+              <h3 className="text-center fw-bold">{formatCurrency(total / listaTotal)}</h3>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={6} md={3} className="mb-2">
+          <Card>
+            <Card.Title className="p-1 text-center mb-0 text-danger">
+              Por dia
+            </Card.Title>
+            <Card.Body className="p-1">
+              <h3 className="text-center fw-bold">{formatCurrency(total / getDaysInMonth())}</h3>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
       <Row>
         <Col className="m-0">
           <input type="text" autoFocus className="form-control" placeholder="Pesquisar" value={termo} onChange={e => setTermo(e.target.value)} />

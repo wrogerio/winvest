@@ -13,6 +13,14 @@ export function toFirstLetterUpperCase(str) {
   });
 }
 
+// return qtd of days in month in year
+export function getDaysInMonth() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  return new Date(year, month, 0).getDate();
+}
+
 // convert string yyyy-MM-dd to dd/mm/yyyy
 export function formatDate_DDMMYYYY(value) {
   const values = value.split('T')[0].split("-");
