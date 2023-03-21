@@ -113,7 +113,7 @@ const Instituicoes = () => {
                     <td>{formatDate_DDMMYYYY(item.DtDividendo)}</td>
                     <td className="d-none d-md-table-cell">{item.Qtd}</td>
                     <td className="text-end d-none d-md-table-cell">{formatCurrency(item.Valor)}</td>
-                    <td className="text-end tdTotal">{formatCurrency(item.Total)}</td>
+                    <td className={["text-end", item.Total > 0 ? "tdTotal" : ""].join(" ")}>{formatCurrency(item.Total)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
                         <i className="fas fa-edit me-2"></i>

@@ -6,8 +6,6 @@ import { GetUltimosResultados } from '@/services/DashboardService';
 import { AbreviaMes, formatCurrency } from '@/helper/util';
 
 
-
-
 const UltimosResultados = ({ lista, titulo }) => {
   return (
     <Card className='mb-2'>

@@ -70,7 +70,7 @@ const Envios = () => {
                     <td>{item.Instituicao}</td>
                     <td className="d-none d-md-table-cell">{item.TipoEnvio}</td>
                     <td className="d-none d-sm-table-cell">{formatDate_DDMMYYYY(item.DtEnvio)}</td>
-                    <td className="text-end tdTotal">{formatCurrency(item.Valor)}</td>
+                    <td className={["text-end", item.Valor > 0 ? "tdTotal" : ""].join(" ")}>{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
                         <i className="fas fa-edit me-2"></i>

@@ -76,7 +76,9 @@ const Instituicoes = () => {
               Média
             </Card.Title>
             <Card.Body className="p-1">
-              <h3 className="text-center fw-bold">{formatCurrency(total / listaTotal)}</h3>
+              <h3 className="text-center fw-bold">{
+                formatCurrency(total / listaTotal)
+              }</h3>
             </Card.Body>
           </Card>
         </Col>
@@ -113,7 +115,7 @@ const Instituicoes = () => {
                     <td className="d-none d-md-table-cell">{item.Instituicao}</td>
                     <td className="text-end d-none d-md-table-cell">{formatCurrency(item.SaldoAnt)}</td>
                     <td className="text-end">{formatCurrency(item.Saldo)}</td>
-                    <td className="text-end d-none d-md-table-cell tdTotal">{formatCurrency(item.Valor)}</td>
+                    <td className={["text-end d-none d-md-table-cell", item.Valor > 0 ? "tdTotal" : ""].join(" ")}>{formatCurrency(item.Valor)}</td>
                     <td className="text-center">
                       <Link href={`/${urlRoot}/add-or-edit/${item.Id}`}>
                         <i className="fas fa-edit me-2"></i>
