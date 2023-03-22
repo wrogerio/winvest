@@ -47,13 +47,13 @@ export default function Home() {
   return (
     <div className='pt-2'>
       <Row className='mb-2'>
-        <Col xs={12} md={4}>
+        <Col xs={12} lg={4}>
           <UltimosResultados titulo="Dividendos" lista={ultimosDividendos} color="text-primary" />
         </Col>
-        <Col xs={12} md={4}>
+        <Col xs={12} lg={4}>
           <UltimosResultados titulo="Rendimentos" lista={ultimosRendimentos} color="text-danger" />
         </Col>
-        <Col xs={12} md={4}>
+        <Col xs={12} lg={4}>
           <UltimosResultados titulo="Resultados" lista={ultimosTotais} color="text-success" />
         </Col>
       </Row>
