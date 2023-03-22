@@ -43,3 +43,7 @@ th {
 .tbDash th {
 	background-color: #d6d3d1 !important;
 }
+
+.text-success {
+	color: #21af28 !important;
+}

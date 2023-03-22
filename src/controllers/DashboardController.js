@@ -1,7 +1,7 @@
 import pool from "@/database/db";
 
 export const GetUltimosResultados = async () => {
-  const query = ` SELECT  Ano, Mes, MesNome, Tipo, Rendimento 
+  const query = ` SELECT  Ano, Mes, DiasMes, MesNome, Tipo, Rendimento 
                   FROM    zDash_Last3_RendDivid
                   ORDER   BY Ano DESC, Mes DESC`;
   try {

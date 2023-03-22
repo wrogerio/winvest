@@ -29,6 +29,7 @@ export default function Home() {
         Ano: ultimosDividendos[index].Ano,
         Mes: ultimosDividendos[index].Mes,
         MesNome: ultimosDividendos[index].MesNome,
+        DiasMes: ultimosDividendos[index].DiasMes,
         Tipo: 'Total',
         Rendimento: ultimosDividendos[index].Rendimento + ultimosRendimentos[index].Rendimento,
       }
@@ -37,7 +38,6 @@ export default function Home() {
 
     setUltimosDividendos(ultimosDividendos);
     setUltimosRendimentos(ultimosRendimentos);
-
   }
 
   useEffect(() => {
@@ -48,13 +48,13 @@ export default function Home() {
     <div className='pt-2'>
       <Row className='mb-2'>
         <Col xs={12} md={4}>
-          <UltimosResultados titulo="Dividendos" lista={ultimosDividendos} />
+          <UltimosResultados titulo="Dividendos" lista={ultimosDividendos} color="text-primary" />
         </Col>
         <Col xs={12} md={4}>
-          <UltimosResultados titulo="Rendimentos" lista={ultimosRendimentos} />
+          <UltimosResultados titulo="Rendimentos" lista={ultimosRendimentos} color="text-danger" />
         </Col>
         <Col xs={12} md={4}>
-          <UltimosResultados titulo="Resultados" lista={ultimosTotais} />
+          <UltimosResultados titulo="Resultados" lista={ultimosTotais} color="text-success" />
         </Col>
       </Row>
     </div>

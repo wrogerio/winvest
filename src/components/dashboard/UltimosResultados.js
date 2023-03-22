@@ -6,11 +6,11 @@ import { GetUltimosResultados } from '@/services/DashboardService';
 import { AbreviaMes, formatCurrency } from '@/helper/util';
 
 
-const UltimosResultados = ({ lista, titulo }) => {
+const UltimosResultados = ({ lista, titulo, color }) => {
   return (
     <Card className='mb-2'>
       <Card.Title className='p-1 text-center mb-0'>
-        <h3 className='text-primary fw-bold'>{titulo}</h3>
+        <h3 className={['fw-bold', color].join(' ')}>{titulo}</h3>
       </Card.Title>
       <Card.Body className='p-2 pt-0'>
         <Table className='tbDash mb-0' bordered size='xs'>
@@ -23,9 +23,30 @@ const UltimosResultados = ({ lista, titulo }) => {
           </thead>
           <tbody>
             <tr>
-              <td>{formatCurrency(lista[2]?.Rendimento)}</td>
-              <td>{formatCurrency(lista[1]?.Rendimento)}</td>
-              <td>{formatCurrency(lista[0]?.Rendimento)}</td>
+              <td>
+                <span className={['d-block fw-bold', color].join(' ')}>
+                  {formatCurrency(lista[2]?.Rendimento)}
+                </span>
+                <span className={['d-block fw-bold', color].join(' ')}>
+                  {formatCurrency(lista[2]?.Rendimento / lista[2]?.DiasMes)}
+                </span>
+              </td>
+              <td>
+                <span className={['d-block fw-bold', color].join(' ')}>
+                  {formatCurrency(lista[1]?.Rendimento)}
+                </span>
+                <span className={['d-block fw-bold', color].join(' ')}>
+                  {formatCurrency(lista[1]?.Rendimento / lista[1]?.DiasMes)}
+                </span>
+              </td>
+              <td>
+                <span className={['d-block fw-bold', color].join(' ')}>
+                  {formatCurrency(lista[0]?.Rendimento)}
+                </span>
+                <span className={['d-block fw-bold', color].join(' ')}>
+                  {formatCurrency(lista[0]?.Rendimento / lista[0]?.DiasMes)}
+                </span>
+              </td>
             </tr>
           </tbody>
         </Table>
