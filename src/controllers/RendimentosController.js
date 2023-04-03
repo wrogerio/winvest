@@ -27,8 +27,8 @@ export const GetItem = async (id) => {
   }
 };
 
-export const GetLast = async () => {
-  const query = ` SELECT TOP 1 Saldo FROM Rendimentos ORDER BY CreateAt DESC`;
+export const GetLast = async (instituicaoId) => {
+  const query = `SELECT TOP 1 Saldo FROM Rendimentos WHERE InstituicaoId = '${instituicaoId}' ORDER BY CreateAt DESC`;
   try {
     await pool.connect();
     const result = await pool.request().query(query);

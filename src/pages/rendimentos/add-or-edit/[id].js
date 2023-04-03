@@ -35,9 +35,14 @@ const Index = () => {
     setValidated(true);
   };
 
-  const getLast = async () => {
-    GetLast().then(data => {
-      setItem({ ...item, SaldoAnt: data.Saldo });
+  const handleChangeInstituicao = async (instituicaoId) => {
+    await getLast(instituicaoId);
+  }
+
+  const getLast = async (instituicaoId) => {
+    if (!instituicaoId) return;
+    GetLast(instituicaoId).then(data => {
+      setItem({ ...item, InstituicaoId: instituicaoId, SaldoAnt: data.Saldo || 0 });
     })
   }
 
@@ -54,9 +59,6 @@ const Index = () => {
         GetItem(id.toLowerCase()).then(item => {
           setItem({ Id: item.Id, InstituicaoId: item.InstituicaoId, DtRendimento: nDateIso(item.DtRendimento), SaldoAnt: item.SaldoAnt, Saldo: item.Saldo });
         })
-      }
-      else {
-        getLast();
       }
     })
   }, [])
@@ -80,7 +82,7 @@ const Index = () => {
             <Col xs={12} lg={6} >
               <Form.Group className="mb-3" controlId="InstituicaoId">
                 <Form.Label>Instituicao</Form.Label>
-                <Form.Select autoFocus required name="InstituicaoId" value={item.InstituicaoId} onChange={e => setItem({ ...item, InstituicaoId: e.target.value })}>
+                <Form.Select autoFocus required name="InstituicaoId" value={item.InstituicaoId} onChange={e => handleChangeInstituicao(e.target.value)}>
                   <option value="">Selecione</option>
                   {instituicoes.map((item, index) => (
                     <option key={index} value={item.Id}>{item.Nome}</option>

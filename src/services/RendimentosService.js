@@ -18,8 +18,8 @@ export const GetItem = async (id) => {
   return data;
 }
 
-export const GetLast = async () => {
-  const response = await fetch(`/api/rendimentos/last`);
+export const GetLast = async (instituicaoId) => {
+  const response = await fetch(`/api/rendimentos/get-last/${instituicaoId}`);
   const data = await response.json();
   return data;
 }
